@@ -26,5 +26,10 @@ repositories {
     kikugieSnapshots()
     gegy()
     parchment()
+    cobblemon()
+    cobblemonSnapshots()
+    nickimpact()
+    cobbledcreators()
+    cobbledcreatorsSnapshots()
 }
 ```
