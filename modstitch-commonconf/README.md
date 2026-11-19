@@ -2,6 +2,19 @@
 
 A Gradle plugin to apply type-safe configuration to either Fabric Loom or ModDevGradle, depending on which one is applied.
 
+## Repository
+
+Add Cobbled Creators repo in `settings.gradle.kts`
+
+```kotlin
+pluginManagement {
+    repositories {
+        // add after other declared repositories
+        maven("https://maven.cobbled-creators.org/releases/")
+    }
+}
+```
+
 ## Usage
 
 ```kotlin

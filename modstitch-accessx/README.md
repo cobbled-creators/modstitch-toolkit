@@ -14,6 +14,19 @@ Each format has slightly different feature sets.
 `accessx` will fail if you attempt to convert to a target missing features from your source file.
 For this reason, it is the recommendation to use the lowest common denominator format as your source file, and convert to the other formats as needed.
 
+## Repository
+
+Add Cobbled Creators repo in `settings.gradle.kts`
+
+```kotlin
+pluginManagement {
+    repositories {
+        // add after other declared repositories
+        maven("https://maven.cobbled-creators.org/releases/")
+    }
+}
+```
+
 ## Usage
 
 ```kotlin

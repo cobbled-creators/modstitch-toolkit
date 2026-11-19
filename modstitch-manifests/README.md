@@ -2,6 +2,21 @@
 
 A Gradle plugin to programmatically generate mod metadata files (e.g. `fabric.mod.json`, `META-INF/neoforge.mods.toml`).
 
+## Repository
+
+Add Cobbled Creators repo in `settings.gradle.kts`
+
+```kotlin
+pluginManagement {
+    repositories {
+        // add after other declared repositories
+        maven("https://maven.cobbled-creators.org/releases/")
+    }
+}
+```
+
+## Usage
+
 ```kotlin
 plugins {
     id("dev.isxander.mtk.manifests") version "0.1.5"

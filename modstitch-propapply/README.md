@@ -10,12 +10,25 @@ This plugin is intended to be used in conjunction with [modstitch-commonconf](./
 to configure the applied plugin in a type-safe way. This can then by used with the 
 [Stonecutter plugin](https://stonecutter.kikugie.dev/) to write a single buildscript for all Stonecutter targets.
 
+## Repository
+
+Add Cobbled Creators repo in `settings.gradle.kts`
+
+```kotlin
+pluginManagement {
+    repositories {
+        // add after other declared repositories
+        maven("https://maven.cobbled-creators.org/releases/")
+    }
+}
+```
+
 ## Usage
 
 `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("dev.isxander.mtk.propapply") version "0.1.0"
+    id("dev.isxander.mtk.propapply") version "0.1.0-java21"
 }
 ```
 

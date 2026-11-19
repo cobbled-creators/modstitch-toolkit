@@ -20,6 +20,19 @@ Uses source sets for per-loader code.
 
 Only supports Fabric and NeoForge.
 
+## Repository
+
+Add Cobbled Creators repo in `settings.gradle.kts`
+
+```kotlin
+pluginManagement {
+    repositories {
+        // add after other declared repositories
+        maven("https://maven.cobbled-creators.org/releases/")
+    }
+}
+```
+
 ## Usage
 
 **You must add the following lines to your `gradle.properties` file:**
