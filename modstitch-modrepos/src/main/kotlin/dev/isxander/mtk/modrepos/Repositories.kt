@@ -15,6 +15,7 @@ internal abstract class MinecraftExtension(repositories: RepositoryHandler)
     override fun exclusive() {
         repositories.exclusiveContent {
             forRepository { invoke() }
+            @Suppress("UnstableApiUsage")
             filter {
                 includeGroupAndSubgroups("com.mojang")
                 includeGroupAndSubgroups("net.minecraft")
@@ -35,7 +36,10 @@ internal abstract class TerraformersMCExtension(repositories: RepositoryHandler)
     override fun exclusive() {
         repositories.exclusiveContent {
             forRepository { invoke() }
-            filter { includeGroupAndSubgroups("com.terraformersmc") }
+            filter {
+                @Suppress("UnstableApiUsage")
+                includeGroupAndSubgroups("com.terraformersmc")
+            }
         }
     }
 }
@@ -52,7 +56,10 @@ internal abstract class TerraformersMCSnapshotsExtension(repositories: Repositor
     override fun exclusive() {
         repositories.exclusiveContent {
             forRepository { invoke() }
-            filter { includeGroupAndSubgroups("com.terraformersmc") }
+            filter {
+                @Suppress("UnstableApiUsage")
+                includeGroupAndSubgroups("com.terraformersmc")
+            }
         }
     }
 }
@@ -197,4 +204,69 @@ fun RepositoryHandler.parchment() =
 
 internal abstract class ParchmentExtension(repositories: RepositoryHandler) : ModRepoExtensionImpl(repositories) {
     override fun invoke() = repositories.parchment()
+}
+
+fun RepositoryHandler.cobblemon() =
+    maven("https://artefacts.cobblemon.com/releases") {
+        name = "Cobblemon Releases"
+    }
+
+internal abstract class CobblemonExtension(repositories: RepositoryHandler)
+    : ModRepoExtensionImpl(repositories), ExclusiveModRepoExtension {
+    override fun invoke() = repositories.cobblemon()
+    override fun exclusive() {
+        repositories.exclusiveContent {
+            forRepository { invoke() }
+            filter {
+                @Suppress("UnstableApiUsage")
+                includeGroupAndSubgroups("com.cobblemon")
+            }
+        }
+    }
+}
+
+fun RepositoryHandler.cobblemonSnapshots() =
+    maven("https://artefacts.cobblemon.com/snapshots") {
+        name = "Cobblemon Snapshots"
+    }
+
+internal abstract class CobblemonSnapshotsExtension(repositories: RepositoryHandler)
+    : ModRepoExtensionImpl(repositories), ExclusiveModRepoExtension {
+    override fun invoke() = repositories.cobblemonSnapshots()
+    override fun exclusive() {
+        repositories.exclusiveContent {
+            forRepository { invoke() }
+            filter {
+                @Suppress("UnstableApiUsage")
+                includeGroupAndSubgroups("com.cobblemon")
+            }
+        }
+    }
+}
+
+fun RepositoryHandler.nickImpact() =
+    maven("https://maven.impactdev.net/repository/development") {
+        name = "NickImpact Development"
+    }
+
+internal abstract class NickImpactExtension(repositories: RepositoryHandler): ModRepoExtensionImpl(repositories) {
+    override fun invoke() = repositories.nickImpact()
+}
+
+fun RepositoryHandler.cobbledCreatorsReleases() =
+    maven("https://maven.cobbled-creators.org/releases/") {
+        name = "Cobbled Creators Releases"
+    }
+
+internal abstract class CobbledCreatorsReleasesExtension(repositories: RepositoryHandler): ModRepoExtensionImpl(repositories) {
+    override fun invoke() = repositories.cobbledCreatorsReleases()
+}
+
+fun RepositoryHandler.cobbledCreatorsSnapshots() =
+    maven("https://maven.cobbled-creators.org/snapshots/") {
+        name = "Cobbled Creators Snapshots"
+    }
+
+internal abstract class CobbledCreatorsSnapshotsExtension(repositories: RepositoryHandler): ModRepoExtensionImpl(repositories) {
+    override fun invoke() = repositories.cobbledCreatorsSnapshots()
 }

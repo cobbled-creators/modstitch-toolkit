@@ -3,7 +3,6 @@ package dev.isxander.mtk.manifests.gen
 import dev.isxander.mtk.manifests.spec.ModManifestSpec.DependencyType
 import dev.isxander.mtk.manifests.spec.ModManifestSpec.Side
 import dev.isxander.mtk.manifests.spec.NeoForgeModsTomlSpec
-import tools.jackson.dataformat.toml.TomlMapper
 
 internal object NeoForgeModsTomlGenerator : ManifestGenerator<NeoForgeModsTomlSpec> {
     override fun generate(spec: NeoForgeModsTomlSpec): String {
@@ -15,8 +14,8 @@ internal object NeoForgeModsTomlGenerator : ManifestGenerator<NeoForgeModsTomlSp
             addProperty("showAsResourcePack", spec.showAsResourcePack)
             addProperty("showAsDataPack", spec.showAsDataPack)
             addListProperty("services", spec.services)
-            addMapProperty("properties", spec.fileProperties)
             addProperty("issueTrackerURL", spec.issueTrackerUrl)
+            addMapProperty("properties", spec.fileProperties)
 
             // Mod-Specific Properties
             val modId = spec.modId.get()
@@ -38,18 +37,22 @@ internal object NeoForgeModsTomlGenerator : ManifestGenerator<NeoForgeModsTomlSp
             }))
 
             spec.javaVersion.orNull?.let { javaVersion ->
-                add("features.$modId", jsonNodeFactory.objectNode().apply {
-                    add("javaVersion", javaVersion)
+                add("features.$modId", jsonNodeFactory.arrayNode().apply {
+                    add(objectNode().apply {
+                        add("javaVersion", javaVersion)
+                    })
                 })
             }
 
             spec.modProperties.getOrElse(emptyMap())
                 .takeIf { it.isNotEmpty() }
                 ?.let { modProperties ->
-                    add("modproperties.$modId", jsonNodeFactory.objectNode().apply {
-                        modProperties.forEach { (propertyKey, propertyValue) ->
-                            add(propertyKey, propertyValue)
-                        }
+                    add("modproperties.$modId", jsonNodeFactory.arrayNode().apply {
+                        add(objectNode().apply {
+                            modProperties.forEach { (propertyKey, propertyValue) ->
+                                add(propertyKey, propertyValue)
+                            }
+                        })
                     })
                 }
 

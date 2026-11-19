@@ -5,14 +5,15 @@ import dev.isxander.mtk.manifests.gen.NeoForgeModsTomlGenerator
 import dev.isxander.mtk.manifests.spec.FabricModJsonSpec
 import dev.isxander.mtk.manifests.spec.NeoForgeModsTomlSpec
 import org.gradle.testfixtures.ProjectBuilder
+import tools.jackson.databind.SerializationFeature
 import tools.jackson.databind.json.JsonMapper
 import tools.jackson.dataformat.toml.TomlMapper
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ManifestGeneratorTest {
-    private val jsonMapper = JsonMapper.builder().build()
-    private val tomlMapper = TomlMapper()
+    private val jsonMapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build()
+    private val tomlMapper = TomlMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build()
 
     @Test
     fun `fabric generator emits common metadata entrypoints mixins contacts and dependency buckets`() {

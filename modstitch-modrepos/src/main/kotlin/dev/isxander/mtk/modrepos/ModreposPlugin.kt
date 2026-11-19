@@ -23,6 +23,11 @@ class ModreposPlugin : Plugin<Project> {
         register<KikugieSnapshotsExtension>(target, "kikugieSnapshots")
         register<GegyExtension>(target, "gegy")
         register<ParchmentExtension>(target, "parchment")
+        register<CobblemonExtension>(target, "cobblemon")
+        register<CobblemonSnapshotsExtension>(target, "cobblemonSnapshots")
+        register<NickImpactExtension>(target, "nickimpact")
+        register<CobbledCreatorsReleasesExtension>(target, "cobbledcreators")
+        register<CobbledCreatorsSnapshotsExtension>(target, "cobbledcreatorsSnapshots")
     }
 
     private fun <T> register(target: Project, name: String, `class`: Class<T>)

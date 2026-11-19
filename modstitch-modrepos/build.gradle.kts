@@ -4,7 +4,7 @@ plugins {
     id("modstitch.gradle-plugin-conventions")
 }
 
-version = "0.1.2"
+version = "0.1.2-java21"
 
 gradlePlugin {
     plugins {

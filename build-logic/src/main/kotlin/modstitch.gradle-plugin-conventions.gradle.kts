@@ -1,8 +1,9 @@
 import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {
-    id("org.gradle.kotlin.kotlin-dsl")
     `java-gradle-plugin`
+    `maven-publish`
+    id("org.gradle.kotlin.kotlin-dsl")
     id("com.gradle.plugin-publish")
 }
 
@@ -20,7 +21,7 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -38,4 +39,36 @@ tasks.withType<Test>().configureEach {
 gradlePlugin {
     website = "https://github.com/isxander/modstitch-toolkit"
     vcsUrl = "https://github.com/isxander/modstitch-toolkit.git"
+
+    repositories {
+        maven {
+            // Set these variables in gh action secrets
+            if (System.getenv("CCM_USER") == null || System.getenv("CCM_PASS") == null) {
+                throw RuntimeException("Did you forget your publication credentials?")
+            }
+            name = "Cobbled Creators Releases"
+            url = uri("https://maven.cobbled-creators.org/releases")
+            credentials {
+                username = System.getenv("CCM_USER").toString()
+                password = System.getenv("CCM_PASS").toString()
+            }
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            // Set these variables in gh action secrets
+            if (System.getenv("CCM_USER") == null || System.getenv("CCM_PASS") == null) {
+                throw RuntimeException("Did you forget your publication credentials?")
+            }
+            name = "CobbledCreatorsReleases"
+            url = uri("https://maven.cobbled-creators.org/releases")
+            credentials {
+                username = System.getenv("CCM_USER").toString()
+                password = System.getenv("CCM_PASS").toString()
+            }
+        }
+    }
 }
